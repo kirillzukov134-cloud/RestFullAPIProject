@@ -1,7 +1,7 @@
 // Загрузка всех студентов
 
 async function getStudents() {
-    let res = await fetch('http://restfullapiproject/Backend/students');
+    let res = await fetch('http://restfullapiproject/RestFullAPIProject/Backend/students');
     let students = await res.json();
     
     let container = document.querySelector('.card-body');
@@ -32,7 +32,7 @@ async function addStudents(event) {
     Data.append('groups', document.getElementById('groups').value);
     Data.append('email', document.getElementById('email').value);
 
-    await fetch('http://restfullapiproject/Backend/students', {
+    await fetch('http://restfullapiproject/RestFullAPIProject/Backend/students', {
         method: 'POST',
         body: Data
     });
@@ -42,7 +42,7 @@ async function addStudents(event) {
 }
 
 async function deleteStudent(id){ 
-    await fetch(`http://restfullapiproject/Backend/students/${id}`, {
+    await fetch(`http://restfullapiproject/RestFullAPIProject/Backend/students/${id}`, {
         method: 'DELETE'    
     });
     await getStudents();
@@ -67,7 +67,7 @@ async function updateStudent(event) {
         email: document.getElementById('email-edit').value
     };
 
-    const response = await fetch(`http://restfullapiproject/Backend/students/${ida}`, {
+    const response = await fetch(`http://restfullapiproject/RestFullAPIProject/Backend/students/${ida}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json'

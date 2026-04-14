@@ -17,10 +17,10 @@
    
 ## Как работать с API
 **1. Получить всех студентов:**
-GET http://restfullapiproject/Backend/students
+GET http://restfullapiproject/RestFullAPIProject/Backend/students
 
 **2. Добавить студента:**
-POST http://restfullapiproject/Backend/students
+POST http://restfullapiproject/RestFullAPIProject/Backend/students
 Пример:
 ```json
 {
@@ -32,11 +32,11 @@ POST http://restfullapiproject/Backend/students
 ```
 
 **3. Получить одного студента:**
-GET http://restfullapiproject/Backend/students/17
+GET http://restfullapiproject/RestFullAPIProject/Backend/students/17
 (где 17 - ID студента)
 
 **4. Обновить студента:**
-PATCH http://restfullapiproject/Backend/students/17
+PATCH http://restfullapiproject/RestFullAPIProject/Backend/students/17
 Пример:
 ```json
 {
@@ -49,5 +49,5 @@ PATCH http://restfullapiproject/Backend/students/17
 (обновит студента с ID=17)
 
 **5. Удалить студента:**
-DELETE http://restfullapiproject/Backend/students/17
+DELETE http://restfullapiproject/RestFullAPIProject/Backend/students/17
 (удалит студента с ID=17)
