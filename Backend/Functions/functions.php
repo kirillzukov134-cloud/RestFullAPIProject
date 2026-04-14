@@ -5,7 +5,7 @@ header("Access-Control-Allow-Headers: *");
 header("Access-Control-Allow-Credentials: true");
 header("Content-Type: application/json");
 
-// Обработка preflight (OPTIONS) запросов
+// Обработка (OPTIONS) запросов
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit();
@@ -47,7 +47,6 @@ function AdditionStudents($pdo, $data){
     $statement->execute($data);
 
     if($statement){
-        http_response_code(200);
             $response = [
         "status"=> true,
         "message"=> "Successfully added student!",
@@ -68,20 +67,28 @@ function AdditionStudents($pdo, $data){
 function DeleteStudent($pdo, $id){
     $sql = "DELETE FROM `students` WHERE id = :id";
     $statement = $pdo->prepare($sql);
-    $statement->bindParam(":id", $id);
-    $statement->execute();
-    http_response_code(200);
-    $response = [
-        "status" => true,
-        "message"=> "Succeful deleted"
-    ];
-    echo json_encode($response);
+    $statement->execute([":id" => $id]);
+    
+    if($statement->rowCount() > 0){
+        $response = [
+            "status" => true,
+            "message"=> "Успешно удалено"
+        ];
+        echo json_encode($response);
+    } else {
+        http_response_code(400);
+        $response = [
+            "status" => false,
+            "message"=> "Ошибка при удалении студента"
+        ];
+        echo json_encode($response);
+    }
 }
 
 //Редактирование студента (Обновление)
 function UpdateStudent($pdo, $id, $data){
     $data['id'] = $id;
-    $sql = "UPDATE `students` SET `name`= :name , `surname`= :surname, `groups`= :groups, `email`= :email  WHERE id = :id";
+    $sql = "UPDATE `students` SET `name`= :name , `surname`= :surname, `groups`= :groups, `email`= :email WHERE id = :id";
     $statement = $pdo->prepare($sql);
     
     if($statement->execute($data)){
